@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailembeds_tags wagtailimages_tags static  %}
+{% load static %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block extra_css %}
+
+{% comment %}
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% endcomment %}
+<link rel="stylesheet" href="{% static 'css/welcome_page.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+
+{{ page.body|richtext }}
+
+<h2>Photo1</h2>
+
+{% for photo in page.photo1.all %}
+<li>
+    {{photo.caption}}
+    <a href="{{photo.image.url}}">
+        <img src="{{photo.image.url}}" alt="{{photo.caption}}" height="120" >
+    </a>
+</li>
+{% endfor %}
+
+
+{% endblock content %}
