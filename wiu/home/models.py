@@ -1,14 +1,12 @@
 from django.db import models
-from django.forms import ModelForm, FileInput, widgets
+from django.forms import widgets
 
 from modelcluster.fields import ParentalKey
 
 from wagtail.admin.edit_handlers import FieldPanel, InlinePanel
-from wagtail.admin.forms import WagtailAdminPageForm
 from wagtail.core.fields import RichTextField
 from wagtail.core.models import Orderable, Page
 from wagtail.images.edit_handlers import ImageChooserPanel
-from wagtail.images.models import Image
 
 
 class HomePage(Page):
@@ -21,16 +19,22 @@ class HomePage(Page):
 
 
 class PropertyPhoto(Orderable):
-    page = ParentalKey(HomePage, on_delete=models.CASCADE, related_name="property_photo")
-    image = models.ForeignKey("wagtailimages.Image", on_delete=models.CASCADE, related_name="+")
+    page = ParentalKey(
+        HomePage, on_delete=models.CASCADE, related_name="property_photo"
+    )
+    image = models.ForeignKey(
+        "wagtailimages.Image", on_delete=models.CASCADE, related_name="+"
+    )
     caption = models.CharField(max_length=32, blank=True, null=True)
     panels = [
         ImageChooserPanel("image"),
         FieldPanel("caption"),
     ]
 
+
 class ClearableImageInput(widgets.ClearableFileInput):
     """Show a thumbnail of the image in the Image Input form."""
+
     template_name = "clearable_image_input.html"
 
 
