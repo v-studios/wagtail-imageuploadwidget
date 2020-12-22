@@ -15,3 +15,6 @@ add an "img" tag.
 
 Downside is that we don't get Wagtail's handy auto-resized renditions,
 so our performance won't be as nice.
+
+.. image:: wagtail-image-upload.png
+   :width: 600

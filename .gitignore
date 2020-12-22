@@ -3,3 +3,4 @@
 __pycache__/*
 *~
 /wiu/media/*
+/wiu/db.sqlite3
